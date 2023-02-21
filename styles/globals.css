@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.main-btn {
+  @apply bg-cyan text-sm text-white px-6 py-3;
+}
