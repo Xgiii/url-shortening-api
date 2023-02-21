@@ -8,7 +8,7 @@ function MainHeader() {
 
   return (
     <>
-      <header className='flex justify-between relative pb-6'>
+      <header className='flex justify-between relative pb-6 p-6 lg:px-32 lg:pt-12'>
         <div className='flex items-center'>
           <Image
             src='/logo.svg'
@@ -18,9 +18,17 @@ function MainHeader() {
             className='mr-10'
           />
           <ul className='hidden md:flex text-sm text-grayish-violet space-x-6'>
-            <li>Features</li>
-            <li>Pricing</li>
-            <li>Resorces</li>
+            <li>
+              <a href='#'>Features</a>
+            </li>
+
+            <li>
+              <a href='#'>Pricing</a>
+            </li>
+
+            <li>
+              <a href='#'>Resorces</a>
+            </li>
           </ul>
         </div>
         <div className='hidden md:flex items-center space-x-6'>
@@ -39,8 +47,8 @@ function MainHeader() {
         />
       </header>
       {mobileMenu && (
-        <div className='absolute bg-dark-violet w-[calc(100%-3.5rem)] mx-auto md:hidden rounded-lg text-xl px-8 text-white'>
-          <ul className='flex flex-col items-center my-8 space-y-4'>
+        <div className='absolute ml-6 bg-dark-violet w-[calc(100%-3.5rem)] mx-auto md:hidden rounded-lg text-xl px-8 py-2 text-white z-10'>
+          <ul className='flex flex-col items-center my-8 space-y-6'>
             <li>Features</li>
             <li>Pricing</li>
             <li>Resorces</li>
