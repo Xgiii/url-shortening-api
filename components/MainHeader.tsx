@@ -8,7 +8,7 @@ function MainHeader() {
 
   return (
     <>
-      <header className='flex justify-between relative pb-6 p-6 lg:px-32 lg:pt-12'>
+      <header className='flex justify-between relative pb-6 p-6 lg:px-32 2xl:px-64 lg:pt-12'>
         <div className='flex items-center'>
           <Image
             src='/logo.svg'

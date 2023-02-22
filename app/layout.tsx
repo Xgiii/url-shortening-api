@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html className={poppins.className}>
       <head></head>
-      <body>
+      <body className='overflow-x-hidden'>
         <MainHeader />
         {children}
       </body>
