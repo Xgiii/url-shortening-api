@@ -30,8 +30,19 @@ function HomePage() {
       </section>
 
       {/* # */}
+      <section className='bg-slate-100 relative mt-32 p-6'>
+        <ShortenLinkForm />
 
-      <ShortenLinkForm />
+        <div className='text-center pt-32'>
+          <h2 className='text-very-dark-violet font-bold tracking-wide text-3xl'>
+            Advanced Statistics
+          </h2>
+          <p className='text-grayish-violet pt-4'>
+            Track how your links are performing across the web with{' '}
+            <span className='md:block'>our advanced statistic dashbord</span>
+          </p>
+        </div>
+      </section>
     </>
   );
 }

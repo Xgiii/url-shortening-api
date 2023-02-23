@@ -5,3 +5,7 @@
 .main-btn {
   @apply bg-cyan text-sm text-white px-6 py-2.5;
 }
+
+button:hover {
+  @apply opacity-90
+}
