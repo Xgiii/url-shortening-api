@@ -15,7 +15,7 @@ function MainHeader() {
             alt='logo'
             width={100}
             height={100}
-            className='mr-10'
+            className='mr-10 w-auto h-auto'
           />
           <ul className='hidden md:flex text-sm text-grayish-violet space-x-6'>
             <li>
