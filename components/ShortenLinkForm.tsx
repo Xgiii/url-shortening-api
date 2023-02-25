@@ -32,11 +32,22 @@ function ShortenLinkForm() {
     }
 
     setLoading(true);
-    const { data } = await fetch('https://api.urlo.in/api/short-url', {
+    const response = await fetch('https://api.urlo.in/api/short-url', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ originalUrl: link }),
-    }).then((data) => data.json());
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+    
+
+    if (!data.shortUrl) {
+      setError('Something went wrong');
+      setLoading(false);
+      return;
+    }
 
     setLinks((prevState) => [
       ...prevState,

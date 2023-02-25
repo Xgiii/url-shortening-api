@@ -33,7 +33,7 @@ function HomePage() {
       <section className='bg-slate-100 relative mt-32 p-6'>
         <ShortenLinkForm />
 
-        <div className='text-center pt-32'>
+        <div className='text-center pt-28'>
           <h2 className='text-very-dark-violet font-bold tracking-wide text-3xl'>
             Advanced Statistics
           </h2>
