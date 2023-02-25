@@ -32,18 +32,19 @@ function ShortenLinkForm() {
     }
 
     setLoading(true);
-    const response = await fetch('https://api.urlo.in/api/short-url', {
+    const response = await fetch('https://t.ly/api/v1/link/shorten', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ originalUrl: link }),
+      body: JSON.stringify({
+        long_url: link,
+        api_token:
+          'o0zABOVsuiA4ZT6qdRJyuG8lbq1wBeDAeA0ODPrbymsnNDgOdSLIbuuYmrl3',
+      }),
     });
 
     const data = await response.json();
 
-    console.log(data);
-    
-
-    if (!data.shortUrl) {
+    if (!data.short_url) {
       setError('Something went wrong');
       setLoading(false);
       return;
@@ -51,7 +52,7 @@ function ShortenLinkForm() {
 
     setLinks((prevState) => [
       ...prevState,
-      { orginalLink: link, shortenLink: data.shortUrl },
+      { orginalLink: link, shortenLink: data.short_url },
     ]);
     setLink('');
     setLoading(false);
@@ -96,7 +97,11 @@ function ShortenLinkForm() {
       <div className='mt-20 space-y-4'>
         {links &&
           links.map(({ orginalLink, shortenLink }) => (
-            <ShortenLink orginalLink={orginalLink} shortenLink={shortenLink} />
+            <ShortenLink
+              key={shortenLink}
+              orginalLink={orginalLink}
+              shortenLink={shortenLink}
+            />
           ))}
       </div>
     </>
