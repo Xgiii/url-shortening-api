@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 
 function ShortenLink({
   orginalLink,
@@ -7,6 +9,13 @@ function ShortenLink({
   orginalLink: string;
   shortenLink: string;
 }) {
+  const [isCopied, setIsCopied] = useState(false)
+
+  function copyHandler() {
+    setIsCopied(true)
+    navigator.clipboard.writeText(shortenLink);
+  }
+
   return (
     <div className='flex flex-col md:flex-row bg-white md:items-center justify-between px-0 md:px-8 py-2 lg:mx-[6.5rem] rounded-md'>
       <a
@@ -17,7 +26,7 @@ function ShortenLink({
         {orginalLink}
       </a>
       <hr className='border border-slate-100 w-full md:hidden' />
-      <div className='flex flex-col md:flex-row items-center mt-4 space-y-2 md:space-y-0 md:space-x-4 px-4 pb-2'>
+      <div className='flex flex-col md:flex-row items-center mt-4 space-y-2 md:space-y-0 md:space-x-6 px-4 pb-2'>
         <a
           target='_blank'
           href={shortenLink}
@@ -25,8 +34,11 @@ function ShortenLink({
         >
           {shortenLink}
         </a>
-        <button className='bg-cyan font-bold px-10 py-2 text-white w-full rounded-md'>
-          Copy
+        <button
+          onClick={copyHandler}
+          className={`font-bold md:w-36 px-10 py-2 text-white w-full rounded-md ${isCopied ? 'bg-dark-violet' : 'bg-cyan'}`}
+        >
+          {isCopied ? 'Copied!' : 'Copy'}
         </button>
       </div>
     </div>

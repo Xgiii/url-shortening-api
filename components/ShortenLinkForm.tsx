@@ -1,7 +1,8 @@
 'use client';
 
+import Cookies from 'js-cookie';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ShortenLink from './ShortenLink';
 
 interface Links {
@@ -19,6 +20,12 @@ function ShortenLinkForm() {
     setError('');
     setLink(e.target.value);
   }
+
+  useEffect(() => {
+    if (Cookies.get('links')) {
+      setLinks(JSON.parse(Cookies.get('links')!));
+    }
+  }, []);
 
   async function shortenLinkHandler() {
     const linkRegex = /^(ftp|http|https):\/\/[^ "]+\.[^ "]+$/;
@@ -54,6 +61,15 @@ function ShortenLinkForm() {
       ...prevState,
       { orginalLink: link, shortenLink: data.short_url },
     ]);
+
+    Cookies.set(
+      'links',
+      JSON.stringify([
+        ...links,
+        { orginalLink: link, shortenLink: data.short_url },
+      ])
+    );
+
     setLink('');
     setLoading(false);
   }
