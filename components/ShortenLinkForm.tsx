@@ -39,36 +39,40 @@ function ShortenLinkForm() {
     }
 
     setLoading(true);
-    const response = await fetch('https://t.ly/api/v1/link/shorten', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        long_url: link,
-        api_token:
-          'o0zABOVsuiA4ZT6qdRJyuG8lbq1wBeDAeA0ODPrbymsnNDgOdSLIbuuYmrl3',
-      }),
-    });
 
-    const data = await response.json();
+    try {
+      const response = await fetch('https://t.ly/api/v1/link/shorten', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          long_url: link,
+          api_token: process.env.NEXT_PUBLIC_TLY_API_KEY,
+        }),
+      });
+      const data = await response.json();
+      if (!data.short_url) {
+        setError('Something went wrong');
+        setLoading(false);
+        return;
+      }
 
-    if (!data.short_url) {
+      setLinks((prevState) => [
+        ...prevState,
+        { orginalLink: link, shortenLink: data.short_url },
+      ]);
+
+      Cookies.set(
+        'links',
+        JSON.stringify([
+          ...links,
+          { orginalLink: link, shortenLink: data.short_url },
+        ])
+      );
+    } catch (error) {
+      setLoading(false)
       setError('Something went wrong');
-      setLoading(false);
       return;
     }
-
-    setLinks((prevState) => [
-      ...prevState,
-      { orginalLink: link, shortenLink: data.short_url },
-    ]);
-
-    Cookies.set(
-      'links',
-      JSON.stringify([
-        ...links,
-        { orginalLink: link, shortenLink: data.short_url },
-      ])
-    );
 
     setLink('');
     setLoading(false);
