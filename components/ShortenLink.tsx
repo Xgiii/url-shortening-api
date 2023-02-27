@@ -17,7 +17,7 @@ function ShortenLink({
   }
 
   return (
-    <div className='flex flex-col md:flex-row bg-white md:items-center justify-between px-0 md:px-8 py-2 lg:mx-[6.5rem] rounded-md'>
+    <div className='flex flex-col md:flex-row bg-white md:items-center justify-between px-0 md:px-8 py-2 lg:mx-[6.5rem] xl:mx-[14.5rem] rounded-md'>
       <a
         href={orginalLink}
         target='_blank'
