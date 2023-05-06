@@ -41,16 +41,13 @@ function ShortenLinkForm() {
     setLoading(true);
 
     try {
-      const response = await fetch('https://t.ly/api/v1/link/shorten', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          long_url: link,
-          api_token: process.env.NEXT_PUBLIC_TLY_API_KEY,
-        }),
-      });
-      const data = await response.json();
-      if (!data.short_url) {
+      const response = await fetch(
+        `https://api.shrtco.de/v2/shorten?url=${link}`
+      );
+      const {result} = await response.json();
+
+
+      if (!result.full_short_link) {
         setError('Something went wrong');
         setLoading(false);
         return;
@@ -58,18 +55,18 @@ function ShortenLinkForm() {
 
       setLinks((prevState) => [
         ...prevState,
-        { orginalLink: link, shortenLink: data.short_url },
+        { orginalLink: link, shortenLink: result.full_short_link },
       ]);
 
       Cookies.set(
         'links',
         JSON.stringify([
           ...links,
-          { orginalLink: link, shortenLink: data.short_url },
+          { orginalLink: link, shortenLink: result.full_short_link },
         ])
       );
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       setError('Something went wrong');
       return;
     }
